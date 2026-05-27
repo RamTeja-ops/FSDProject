@@ -1,0 +1,73 @@
+nav a{
+    margin-right: 15px;
+    text-decoration: none;
+    color: #f8f3f3;
+}
+nav a:hover{
+    color : rgb(255, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+nav{
+    font-size: 20px;
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+body{
+    font-size: 18px;
+    text-align: center;
+    background-color: #98a87b;
+}
+form{
+    display:block;
+    margin: 0 auto;
+    border: 2px solid black;
+    width: 300px;
+    padding: 20px;
+    text-align: left;
+}
+label{
+    display: block;
+    margin: 10px;
+    /* padding: 5px; */
+}
+input{
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+button{
+    width: 100%;
+    margin-top:5px;
+    padding: 10px;
+    color: black;
+    background-color: beige;
+}
+tr:nth-child(even){
+    background-color: grey
+}
+table{
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    /* border-collapse: separate; */
+}
+td{
+    border: 1px solid black;
+    padding: 8px;
+}
+th{
+    border: 1px solid black;
+    padding: 8px;
+    background-color: black;
+    color: rgb(124, 116, 116);
+}
+td a:hover{
+    color : yellow;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius:10px;
+    background-color: rgba(206, 180, 125, 0.829);
+}
