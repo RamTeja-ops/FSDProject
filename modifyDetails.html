@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditStudent</title>
+</head>
+<body>
+    <div>
+        <a href="dashboard.html">Home</a>
+        <a href="addStudents.html">add-students</a>
+        <a href="viewStudents.html">view-students</a>
+        <a href="logout.html">logout</a>
+    </div>
+    <h1>Edit Student Details</h1>
+    <form action="viewStudents.html">
+        <label for="studentName">Name:</label>
+        <input type="text" id="studentName" name="studentName" required>
+        <br><br>
+        <label for="rollNumber">RollNumber:</label>
+        <input type="text" id="rollNumber" name="rollNumber" required>
+        <br><br>
+        <label for="branch">Branch:</label>
+        <input type="text" id="branch" name="branch" required>
+        <br><br>
+        <label for="year">Year</label>
+        <input type="number" id="year" name="year" min="1" max="4" required>
+        <br><br>
+        <label for="CGPA" >CGPA:</label>
+        <input type="number" id="CGPA" name="CGPA" step="0.1" min="0" max="10" required>
+        <br><br>
+        <button type="submit">Update Student</button>
+    </form>
+</body>
+</html>
