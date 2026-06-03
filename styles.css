@@ -14,56 +14,89 @@ nav{
     padding: 10px;
     color: white;
 }
+
 body{
     font-size: 18px;
     text-align: center;
-    background-color: #98a87b;
 }
+
 form{
     display:block;
     margin: 0 auto;
+    background-color: #98a87b;
+    border-radius:20px;
     border: 2px solid black;
-    width: 300px;
+    width: 405px;
     padding: 20px;
     text-align: left;
+    animation-name: LoginFade;
+    animation-duration:2s;
 }
+
+@keyframes LoginFade{
+    from{
+        transform:translate(0px,200px);
+        /* transform:rotate(360deg); */
+        opacity:0.3;
+    }
+    to{
+        transform:translate(0px,0px);
+        opacity:1;
+    }
+}
+
 label{
     display: block;
     margin: 10px;
     /* padding: 5px; */
 }
+
 input{
     width: 100%;
     padding: 8px;
     margin: 5px 0;
     box-sizing: border-box;
 }
+
 button{
     width: 100%;
     margin-top:5px;
     padding: 10px;
+    border-radius: 20px;
     color: black;
     background-color: beige;
 }
+
+button:hover{
+    transform:scale(1.1);
+    color:white;
+    background-color: grey;
+    box-sizing: border-box;
+}
+
 tr:nth-child(even){
     background-color: grey
 }
+
 table{
     margin: 0 auto;
     border: 2px solid black;
     border-radius: 10px;
     /* border-collapse: separate; */
 }
+
 td{
     border: 1px solid black;
     padding: 8px;
 }
+
 th{
     border: 1px solid black;
     padding: 8px;
     background-color: black;
     color: rgb(124, 116, 116);
 }
+
 td a:hover{
     color : yellow;
     font-weight: bold;
