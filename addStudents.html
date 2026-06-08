@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Add Students</title>
+    <script>
+        function addStud(){
+            event.preventDefault();
+            let sname=document.getElementById("studentName").value;
+            let roll=document.getElementById("rollNumber").value;
+            let branch=document.getElementById("branch").value;
+            let year=document.getElementById("year").value;
+            let cgpa=document.getElementById("CGPA").value;
+
+            let obj={
+                sname:sname,
+                roll:roll,
+                branch:branch,
+                year:year,
+                cgpa:cgpa
+            };
+
+            let store=JSON.parse(localStorage.getItem('students'));
+
+            if(!store){
+                const arr=[obj];
+                localStorage.setItem('students',JSON.stringify(arr));
+            }
+            else{
+                store.push(obj);
+                localStorage.setItem('students',JSON.stringify(store));
+            }
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -14,7 +43,7 @@
         <a href="logout.html">logout</a>
     </nav>
     <h1>Add Student</h1>
-    <form action="viewStudents.html">
+    <form onsubmit="addStud()">
         <label for="studentName">Name:</label>
         <input type="text" id="studentName" name="studentName" required>
         <br><br>

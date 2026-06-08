@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Register</title>
+    <script>
+        function registerUser(){
+            event.preventDefault();
+            let uname=document.getElementById("username").value;
+            let pwd=document.getElementById("password").value;
+            let mail=document.getElementById("email").value;
+            let confirmPwd=document.getElementById("confirm_password").value;
+            if(pwd!=confirmPwd){
+                window.alert(`Password and confirm password are not matching`);
+                return;
+            }
+            const userDetails={
+                name:uname,
+                email:mail,
+                password:pwd
+            };
+            localStorage.setItem(uname,JSON.stringify(userDetails));
+            window.location.href="login.html";
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -14,7 +34,7 @@
     </nav>
     <br><br>
     <h2>Create Your Account</h2>
-    <form action="login.html">
+    <form onsubmit="registerUser()">
         <label>Username</label>
         <input type="text" name="username" id="username" placeholder="Username" required>
         <br>

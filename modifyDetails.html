@@ -5,6 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>EditStudent</title>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const rollId = params.get('roll');
+        
+        window.addEventListener('DOMContentLoaded', function(){
+            let dbase=JSON.parse(localStorage.getItem('students')) || [];
+            let student = dbase.find(s => s.roll == rollId);
+            
+            if(student){
+                document.getElementById("studentName").value = student.sname;
+                document.getElementById("rollNumber").value = student.roll;
+                document.getElementById("branch").value = student.branch;
+                document.getElementById("year").value = student.year;
+                document.getElementById("CGPA").value = student.cgpa;
+            }
+        });
+        
+        function updateStud(){
+            event.preventDefault();
+            let sname=document.getElementById("studentName").value;
+            let roll=document.getElementById("rollNumber").value;
+            let branch=document.getElementById("branch").value;
+            let year=document.getElementById("year").value;
+            let cgpa=document.getElementById("CGPA").value;
+
+            let obj={
+                sname:sname,
+                roll:roll,
+                branch:branch,
+                year:year,
+                cgpa:cgpa
+            };
+
+            let store=JSON.parse(localStorage.getItem('students')) || [];
+
+            store.forEach((ele,idx)=>{
+                if(ele.roll==roll)store.splice(idx,1,obj);
+            });
+            
+            localStorage.setItem('students', JSON.stringify(store));
+            window.location.href='viewStudents.html';
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -14,7 +57,7 @@
         <a href="logout.html">logout</a>
     </nav>
     <h1>Edit Student Details</h1>
-    <form action="viewStudents.html">
+    <form onsubmit="updateStud()">
         <label for="studentName">Name:</label>
         <input type="text" id="studentName" name="studentName" required>
         <br><br>

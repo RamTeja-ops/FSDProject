@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Login</title>
+    <script>
+        function validateLogin(){
+            event.preventDefault();
+            let uname=document.getElementById("username").value;
+            let pwd=document.getElementById("password").value;
+
+            let userDetails = JSON.parse(localStorage.getItem(uname));
+
+            if(!userDetails){
+                window.alert(`${uname} doesn't exist in the database`);
+                return;
+            }
+
+            else if(userDetails.password!=pwd){
+                window.alert(`Credentials Entered are Incorrect`);
+                return ;
+            }
+            // if(userDetails && userDetails.name==uname && userDetails.password==pwd){
+            else {
+                window.location.href='dashboard.html';
+            }
+        }
+    </script>
 </head>
 <body>
     <nav>
@@ -14,14 +37,14 @@
     </nav>
     <br><br>
     <h2>Login to Your Account</h2>
-    <form action="dashboard.html">
+    <form onsubmit="validateUser()">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" placeholder="Username" required>
         <br>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" placeholder="Password" required>
         <br><br>
-        <h13>Don't have an account? <a href="signup.html">Sign Up</a></h3>
+        <h3>Don't have an account? <a href="signup.html">Sign Up</a></h3>
         <br><br>
         <button type="submit">Login</button>
     </form>
