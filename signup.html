@@ -12,15 +12,37 @@
             let pwd=document.getElementById("password").value;
             let mail=document.getElementById("email").value;
             let confirmPwd=document.getElementById("confirm_password").value;
+
+            let unameRegEx=/^\w{6}/;
+            if(!unameRegEx.test(uname)){
+                window.alert(`username should be minimum of 6 characters long and shouldn't contain special characters`);
+                return;
+            }
+            
+            let emailRegEx=/^\w{4,}(@)[a-z]{1,8}\.(com)$/
+            if(!emailRegEx.test(mail)){
+                window.alert(`Email entered is not following `);
+                return;
+            }
+            
+            let password=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$&*]).{8,12}$/
+            
+            if(!password.test(pwd)){
+                window.alert(`password should contains atleast one lowercase,one uppercase,one numeric and one special character`);
+                return;
+            }
+
             if(pwd!=confirmPwd){
                 window.alert(`Password and confirm password are not matching`);
                 return;
             }
+
             const userDetails={
                 name:uname,
                 email:mail,
                 password:pwd
             };
+            
             localStorage.setItem(uname,JSON.stringify(userDetails));
             window.location.href="login.html";
         }
@@ -39,7 +61,7 @@
         <input type="text" name="username" id="username" placeholder="Username" required>
         <br>
         <label>Email</label>
-        <input type="email" name="email" id="email" placeholder="Email" required>
+        <input type="text" name="email" id="email" placeholder="Email" required>
         <br>
         <label>Password</label>
         <input type="password" name="password" id="password" placeholder="Password" required>
