@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "name": "RamTeja",
+      "email": "ramu@gmail.com",
+      "password": "Ramteja@1234",
+      "id": "c_OFWq3XABM"
+    },
+    {
+      "name": "ChotaBheem",
+      "email": "bheemu@gmail.com",
+      "password": "Ramteja@1234",
+      "id": "91_-s-zOEgY"
+    }
+  ],
+  "students": [
+    {
+      "sname": "Ram",
+      "roll": "23B81A05T1",
+      "branch": "Computer Science Engineering",
+      "year": "4",
+      "cgpa": "9",
+      "id": "Dd1fhNemqyc"
+    },
+    {
+      "sname": "Bheem",
+      "roll": "23B81A05T7",
+      "branch": "EEE",
+      "year": "3",
+      "cgpa": "8.5",
+      "id": "bFIt3rcOC9U"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

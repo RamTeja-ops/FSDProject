@@ -43,7 +43,13 @@
                 password:pwd
             };
             
-            localStorage.setItem(uname,JSON.stringify(userDetails));
+            // localStorage.setItem(uname,JSON.stringify(userDetails));
+            // window.location.href="login.html";
+            fetch("http://localhost:3000/users",{
+                method:"POST",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(userDetails)
+            });
             window.location.href="login.html";
         }
     </script>

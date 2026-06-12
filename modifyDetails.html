@@ -6,23 +6,28 @@
     <link rel="stylesheet" href="styles.css">
     <title>EditStudent</title>
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const rollId = params.get('roll');
-        
-        window.addEventListener('DOMContentLoaded', function(){
-            let dbase=JSON.parse(localStorage.getItem('students')) || [];
-            let student = dbase.find(s => s.roll == rollId);
-            
-            if(student){
+        const id = new URLSearchParams(window.location.search).get("id");
+        // let len=ex.length;
+        // const id=ex.substring(3,len-2);
+        console.log(id);
+        async function loadPage(){
+            // window.addEventListener('DOMContentLoaded', async function(){
+                // let dbase=JSON.parse(localStorage.getItem('students')) || [];
+            const api=await fetch(`http://localhost:3000/students/${id}`,{method:"GET"});
+            const student=await api.json();
+            // let student = dbase.find(s => s.id == rollId);
+            console.log(student);
+            // if(student){
                 document.getElementById("studentName").value = student.sname;
                 document.getElementById("rollNumber").value = student.roll;
                 document.getElementById("branch").value = student.branch;
                 document.getElementById("year").value = student.year;
                 document.getElementById("CGPA").value = student.cgpa;
-            }
-        });
-        
-        function updateStud(){
+            // }
+            // });
+        }
+
+        async function updateStud(){
             event.preventDefault();
             let sname=document.getElementById("studentName").value;
             let roll=document.getElementById("rollNumber").value;
@@ -38,18 +43,23 @@
                 cgpa:cgpa
             };
 
-            let store=JSON.parse(localStorage.getItem('students')) || [];
+            // let store=JSON.parse(localStorage.getItem('students')) || [];
 
-            store.forEach((ele,idx)=>{
-                if(ele.roll==roll)store.splice(idx,1,obj);
-            });
+            // store.forEach((ele,idx)=>{
+            //     if(ele.roll==roll)store.splice(idx,1,obj);
+            // });
             
-            localStorage.setItem('students', JSON.stringify(store));
-            window.location.href='viewStudents.html';
+            // localStorage.setItem('students', JSON.stringify(store));
+            // window.location.href='viewStudents.html';
+            const api=await fetch(`http://localhost:3000/students/${id}`,{
+                method:"PATCH",
+                body:JSON.stringify(obj)
+            });
+            window.location.href="viewStudents.html";
         }
     </script>
 </head>
-<body>
+<body onload="loadPage()">
     <nav>
         <a href="dashboard.html">Home</a>
         <a href="addStudents.html">add-students</a>

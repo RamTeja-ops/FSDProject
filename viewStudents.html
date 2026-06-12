@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>view Students</title>
 </head>
-<body>
+<body onload="fillPage()">
     <nav>
         <a href="dashboard.html">Home</a>
         <a href="addStudents.html">add-students</a>
@@ -30,25 +30,48 @@
         </tbody>
     </table>
     <script>
-        let tbody=document.getElementsByTagName("tbody")[0];
-        let dbase=JSON.parse(localStorage.getItem('students')) || [];
+        async function fillPage(){
+            const tbody=document.getElementsByTagName("tbody")[0];
+            const api=await fetch("http://localhost:3000/students",{
+                method:"GET"
+            });
+            const dbase= await api.json();
+            // console.log(dbase);
+            for(let obj of dbase){
+                // if(obj.display){
+                    let trow=document.createElement("tr");
 
-        for(let obj of dbase){
-            let trow=document.createElement("tr");
+                    trow.innerHTML=`<td>${obj.sname}</td>
+                                    <td>${obj.roll}</td>
+                                    <td>${obj.branch}</td>
+                                    <td>${obj.year}</td>
+                                    <td>${obj.cgpa}</td>
+                                    <td><a href="modifyDetails.html?id=${obj.id}">Edit</a> / <a href="#" onclick="deleteStudent('${obj.id}'); return false;">Delete</a></td>`;
+                    tbody.appendChild(trow);
+                // }
+            }
+        }   
 
-            trow.innerHTML=`<td>${obj.sname}</td>
-                            <td>${obj.roll}</td>
-                            <td>${obj.branch}</td>
-                            <td>${obj.year}</td>
-                            <td>${obj.cgpa}</td>
-                            <td><a href="modifyDetails.html?roll=${obj.roll}">Edit</a> / <a href="#" onclick="deleteStudent('${obj.roll}'); return false;">Delete</a></td>`;
-            tbody.appendChild(trow);
-        }
+        async function deleteStudent(id){
+            // let dbase=JSON.parse(localStorage.getItem('students')) || [];
+            // dbase = dbase.filter(student => student.roll != roll);
+            // localStorage.setItem('students', JSON.stringify(dbase));
+            // location.reload();
+            // const api=await fetch("http://localhost:3000/students",{
+            //     method:"GET"
+            // });
+            
+            // const list=await api.json();
+            // console.log(list);
+            // let idx=list.findIndex((obj)=>obj.roll==roll);
+            
+            // let id=list[idx].id;
 
-        function deleteStudent(roll){
-            let dbase=JSON.parse(localStorage.getItem('students')) || [];
-            dbase = dbase.filter(student => student.roll != roll);
-            localStorage.setItem('students', JSON.stringify(dbase));
+            // console.log(id);
+
+            await fetch(`http://localhost:3000/students/${id}`,{
+                method:'DELETE'
+            })
             location.reload();
         }
     </script>
