@@ -8,10 +8,10 @@
 </head>
 <body onload="fillPage()">
     <nav>
-        <a href="dashboard.html">Home</a>
-        <a href="addStudents.html">add-students</a>
-        <a href="viewStudents.html">view-students</a>
-        <a href="logout.html">logout</a>
+        <a href="/dashboard">Home</a>
+        <a href="/addStudent">add-students</a>
+        <a href="/students">view-students</a>
+        <a href="/logout">logout</a>
     </nav>
     <h1>View Students</h1>
     <table>
@@ -32,11 +32,15 @@
     <script>
         async function fillPage(){
             const tbody=document.getElementsByTagName("tbody")[0];
-            const api=await fetch("http://localhost:3000/students",{
+            const api=await fetch("http://localhost:5000/viewStudents",{
                 method:"GET"
             });
-            const dbase= await api.json();
-            // console.log(dbase);
+            let dbase= await api.json();
+            
+            console.log(dbase);
+            console.log(dbase.students);
+
+            dbase=dbase.students;
             for(let obj of dbase){
                 // if(obj.display){
                     let trow=document.createElement("tr");
@@ -46,7 +50,7 @@
                                     <td>${obj.branch}</td>
                                     <td>${obj.year}</td>
                                     <td>${obj.cgpa}</td>
-                                    <td><a href="modifyDetails.html?id=${obj.id}">Edit</a> / <a href="#" onclick="deleteStudent('${obj.id}'); return false;">Delete</a></td>`;
+                                    <td><a href="/modifyStudent?id=${obj.id}">Edit</a> / <a href="#" onclick="deleteStudent('${obj.id}'); return false;">Delete</a></td>`;
                     tbody.appendChild(trow);
                 // }
             }
@@ -69,7 +73,7 @@
 
             // console.log(id);
 
-            await fetch(`http://localhost:3000/students/${id}`,{
+            await fetch(`http://localhost:5000/students/${id}`,{
                 method:'DELETE'
             })
             location.reload();

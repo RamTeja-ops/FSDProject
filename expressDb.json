@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "RamTeja",
+      "email": "tejamidatada1234@gmail.com",
+      "password": "Ramteja@1234"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "sname": "Ram",
+      "roll": "23B81A05T1",
+      "branch": "Computer Science Engineering",
+      "year": "3",
+      "cgpa": "9"
+    },
+    {
+      "id": 3,
+      "sname": "Blade-babji",
+      "roll": "23B81A05R8",
+      "branch": "EEE",
+      "year": "2",
+      "cgpa": "9.6"
+    }
+  ]
+}

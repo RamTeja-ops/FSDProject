@@ -6,52 +6,79 @@
     <link rel="stylesheet" href="styles.css">
     <title>Login</title>
     <script>
-        async function validateLogin(){
+        async function validateLogin(event){
             event.preventDefault();
             let uname=document.getElementById("username").value;
             let pwd=document.getElementById("password").value;
-            console.log(uname+pwd);
-            // let userDetails = JSON.parse(localStorage.getItem(uname));
-            const obj=await fetch("http://localhost:3000/users",{method:"GET"})
-            const users=await obj.json();
+            // console.log(uname+pwd);
+            // // let userDetails = JSON.parse(localStorage.getItem(uname));
+            // const obj=await fetch("http://localhost:3000/users",{method:"GET"})
+            // const users=await obj.json();
 
-            console.log(users);
-            if(!users.some((objs)=>objs.name==uname)){
-                window.alert(`${uname} doesn't exist in the database`);
-                return;
-            }
-            // if(userDetails && userDetails.name==uname && userDetails.password==pwd){
-            else {
+            // console.log(users);
+            // if(!users.some((objs)=>objs.name==uname)){
+            //     window.alert(`${uname} doesn't exist in the database`);
+            //     return;
+            // }
+            // // if(userDetails && userDetails.name==uname && userDetails.password==pwd){
+            // else {
                 
-                const idx=users.findIndex((obj)=>obj.name==uname);
-                const mainUser=users[idx];
-                if(mainUser.password!=pwd){
-                    window.alert(`Credentials Entered are Incorrect`);
-                    return ;
-                }
-                else {
-                    window.location.href='dashboard.html';
-                }
+            //     const idx=users.findIndex((obj)=>obj.name==uname);
+            //     const mainUser=users[idx];
+            //     if(mainUser.password!=pwd){
+            //         window.alert(`Credentials Entered are Incorrect`);
+            //         return ;
+            //     }
+            //     else {
+            //         window.location.href='/dashboard';
+            //     }
+            // }
+
+            const loginDetails={
+                name:uname,
+                password:pwd
+            };
+
+            console.log(loginDetails);
+
+            const response=await fetch("http://localhost:5000/api/login",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(loginDetails)
+            });
+
+            const result=await response.json();
+
+            console.log(result);
+
+            if(result.success){
+                window.location.href='/dashboard';
             }
+            else{
+                alert("Credentials Entered are incorrect");
+            }
+            
         }
     </script>
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-        <a href="signup.html">Register</a>
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/signup">Register</a>
     </nav>
     <br><br>
     <h2>Login to Your Account</h2>
-    <form onsubmit="validateLogin()">
+    <form onsubmit="validateLogin(event)">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" placeholder="Username" required>
         <br>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" placeholder="Password" required>
         <br><br>
-        <h3>Don't have an account? <a href="signup.html">Sign Up</a></h3>
+        <h3>Don't have an account? <a href="/signup">Sign Up</a></h3>
         <br><br>
         <button type="submit">Login</button>
     </form>

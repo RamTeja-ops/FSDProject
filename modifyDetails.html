@@ -13,7 +13,7 @@
         async function loadPage(){
             // window.addEventListener('DOMContentLoaded', async function(){
                 // let dbase=JSON.parse(localStorage.getItem('students')) || [];
-            const api=await fetch(`http://localhost:3000/students/${id}`,{method:"GET"});
+            const api=await fetch(`http://localhost:5000/students/${id}`,{method:"GET"});
             const student=await api.json();
             // let student = dbase.find(s => s.id == rollId);
             console.log(student);
@@ -51,20 +51,32 @@
             
             // localStorage.setItem('students', JSON.stringify(store));
             // window.location.href='viewStudents.html';
-            const api=await fetch(`http://localhost:3000/students/${id}`,{
-                method:"PATCH",
-                body:JSON.stringify(obj)
-            });
-            window.location.href="viewStudents.html";
+            try {
+                const api=await fetch(`http://localhost:5000/students/${id}`,{
+                    method:"PATCH",
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify(obj)
+                });
+                const result = await api.json();
+                console.log("Update response:", result);
+                if(result.success) {
+                    window.location.href="/students";
+                } else {
+                    alert("Error updating student: " + result.message);
+                }
+            } catch(err) {
+                console.error("Update error:", err);
+                alert("Error: " + err.message);
+            }
         }
     </script>
 </head>
 <body onload="loadPage()">
     <nav>
-        <a href="dashboard.html">Home</a>
-        <a href="addStudents.html">add-students</a>
-        <a href="viewStudents.html">view-students</a>
-        <a href="logout.html">logout</a>
+        <a href="/dashboard">Home</a>
+        <a href="/addStudent">add-students</a>
+        <a href="/students">view-students</a>
+        <a href="/logout">logout</a>
     </nav>
     <h1>Edit Student Details</h1>
     <form onsubmit="updateStud()">

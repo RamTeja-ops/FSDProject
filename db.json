@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "name": "Bendapparao",
+      "email": "abc@gmail.com",
+      "password": "abcd@1234"
+    },
+    {
+      "name": "RamTeja",
+      "email": "tejamidatada1234@gmail.com",
+      "password": "Ramteja@1234"
+    },
+    { "name": "lily123", "email": "lily123@gmail.com", "password": "Abcd@1234" }
+  ],
+  "students": [
+    {
+      "sname": "Ram",
+      "roll": "23B81A05T1",
+      "branch": "Computer Science Engineering",
+      "year": "4",
+      "cgpa": "8"
+    },
+    {
+      "sname": "Bendapparao",
+      "roll": "23B81A05T1",
+      "branch": "CSE",
+      "year": "3",
+      "CGPA": "9"
+    }
+  ]
+}
